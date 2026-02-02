@@ -1,0 +1,8 @@
+/Back-end/.env
+/Back-end/.package-lock.json
+/Back-end/.package.json
+/Back-end/node_modules/
+/Front-end/node_modules/
+/Front-end/.env
+/Front-end/.package-lock.json
+/Front-end/.package.json
