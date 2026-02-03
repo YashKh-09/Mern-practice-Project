@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json({ message: "Basic Server" });
+  res.send( "Basic Server");
 });
 
 mongoose
