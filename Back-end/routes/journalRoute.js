@@ -1,8 +1,8 @@
 import express from "express";
-import journal from "../models/journal";
+import journal from "../models/journal.js";
 const routes = express.Router();
 
-routes.get("/api/entries/", async (req, res) => {
+routes.get("/", async (req, res) => {
   const journalEntries = await journal.find();
   res.status(200).json({
     success: true,
@@ -11,7 +11,7 @@ routes.get("/api/entries/", async (req, res) => {
   });
 });
 
-routes.get("/api/entries/:id", async (req, res) => {
+routes.get("/:id", async (req, res) => {
   const journalEntry = await journal.findById(req.params.id);
 
   if (!journalEntry) {
@@ -21,7 +21,7 @@ routes.get("/api/entries/:id", async (req, res) => {
   res.status(200).json({ success: true, Journal: journalEntry });
 });
 
-routes.post("/api/entries/", async (req, res) => {
+routes.post("/", async (req, res) => {
   const { title, content, mood } = req.body;
   const newJournal = await journal.create({
     title,
@@ -32,7 +32,7 @@ routes.post("/api/entries/", async (req, res) => {
   res.status(201).json({ success: true, journal: newJournal });
 });
 
-routes.put("/api/entries/:id", async (req, res) => {
+routes.put("/:id", async (req, res) => {
   const updateJournal = await journal.findByIdAndUpdate(
     req.params.id,
     req.body,
@@ -44,10 +44,12 @@ routes.put("/api/entries/:id", async (req, res) => {
   res.status(200).json({ success: true, updatedJournal: updateJournal });
 });
 
-routes.delete("/api/entries/:id", async (req, res) => {
+routes.delete("/:id", async (req, res) => {
   const deleteJournal = await journal.findByIdAndDelete(req.params.id);
   if (!deleteJournal) {
     return res.status(404).send("Page Not Found");
   }
   res.status(200).json({ success: true, message: "Journal deleted" });
 });
+
+export default routes

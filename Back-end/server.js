@@ -2,6 +2,7 @@ import express, { json } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import journalRoutes from "./routes/journalRoute.js"
 
 dotenv.config({ quiet: true });
 
@@ -10,6 +11,7 @@ const PORT = process.env.PORT || 5001;
 
 app.use(cors());
 app.use(express.json());
+app.use('/journal', journalRoutes);
 
 app.get("/", (req, res) => {
   res.send( "Basic Server");
