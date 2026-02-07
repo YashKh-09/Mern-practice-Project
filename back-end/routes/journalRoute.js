@@ -23,6 +23,9 @@ routes.get("/:id", async (req, res) => {
 
 routes.post("/", async (req, res) => {
   const { title, content, mood } = req.body;
+  if (!req.body || !title || !content || !mood) {
+    return res.status(400).json({ success: false, message: "please provide all the required fields" });
+  }
   const newJournal = await journal.create({
     title,
     content,
